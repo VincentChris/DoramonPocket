@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import Unocss from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import presetUno from '@unocss/preset-uno';
+import presetIcons from '@unocss/preset-icons';
+import presetAttributify from '@unocss/preset-attributify';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,6 +17,20 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()],
+    }),
+    Unocss({
+      rules: [['w-ss', { width: '16rem' }]],
+      shortcuts: [{ logo: 'i-logos-vue w-6em h-6em transform transition-800' }],
+      presets: [
+        presetUno(),
+        presetAttributify(),
+        presetIcons({
+          extraProperties: {
+            display: 'inline-block',
+            'vertical-align': 'middle',
+          },
+        }),
+      ],
     }),
   ],
 
